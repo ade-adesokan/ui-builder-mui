@@ -1,6 +1,14 @@
 import React from "react";
 import "./App.css";
-import { Box, Button, Divider, Stack } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Divider,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { Data, DropZone, Puck, usePuck } from "@measured/puck";
 import "@measured/puck/puck.css";
 import { config } from "./puckConfig";
@@ -15,28 +23,21 @@ const CustomHeader = ({ onPublish }: { onPublish: (data: Data) => void }) => {
   const { appState, dispatch } = usePuck();
 
   return (
-    <header
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: 16,
-        padding: "16px 24px",
-        background: "white",
-        color: "black",
-        alignItems: "center",
-        borderBottom: "1px solid #ddd",
-      }}
-      onClick={() => dispatch({ type: "setUi", ui: { itemSelector: null } })}
-    >
-      <span style={{ fontWeight: 600 }}>Custom UI example </span>
-      <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
-        <div>
-          <Button variant="contained" onClick={() => onPublish(appState.data)}>
-            Publish
-          </Button>
-        </div>
-      </div>
-    </header>
+    <AppBar position="static">
+      <Toolbar variant="dense">
+        <Typography
+          variant="h6"
+          color="inherit"
+          component="div"
+          sx={{ flexGrow: 1 }}
+        >
+          UI Builder
+        </Typography>
+        <Button color="inherit" onClick={() => onPublish(appState.data)}>
+          Publish
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 
